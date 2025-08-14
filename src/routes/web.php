@@ -8,6 +8,11 @@ use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Web\LoginController;
 use App\Http\Controllers\Web\PasswordController;
+use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\ReadingRecordController;
+use App\Http\Controllers\PublicController;
+use App\Http\Controllers\Web\DashboardController;
 use App\Http\Middleware\VerifyCsrfToken;
 
 /*
@@ -54,4 +59,38 @@ Route::group(['middleware' => 'basicauth'], function () {
     // API
     Route::post('/api/upload', [ImageController::class, 'upload'])->withoutMiddleware(VerifyCsrfToken::class)->name('upload');
     Route::post('/api/upload/ma', [ImageController::class, 'maUpload'])->withoutMiddleware(VerifyCsrfToken::class)->name('upload.ma');
+});
+
+// 技術書読書管理システムのルート
+
+// 公開ページ（認証不要）
+Route::get('/', [PublicController::class, 'landing'])->name('landing');
+Route::get('/users/{user}/reading-list', [PublicController::class, 'userReadingList'])->name('public.user.reading-list');
+Route::get('/users/{user}/records/{readingRecord}', [PublicController::class, 'readingRecord'])->name('public.reading-record');
+Route::get('/public/records', [PublicController::class, 'allPublicRecords'])->name('public.all-records');
+
+// Google OAuth認証
+Route::get('/auth/google', [GoogleController::class, 'redirect'])->name('auth.google');
+Route::get('/auth/google/callback', [GoogleController::class, 'callback'])->name('auth.google.callback');
+
+// 認証が必要なルート
+Route::middleware(['auth'])->group(function () {
+    // ダッシュボード
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    
+    // 書籍関連
+    Route::resource('books', BookController::class)->except(['edit', 'update', 'destroy']);
+    Route::post('/books/search-isbn', [BookController::class, 'searchByIsbn'])->name('books.search-isbn');
+    Route::post('/books/create-from-api', [BookController::class, 'createFromApi'])->name('books.create-from-api');
+    Route::post('/books/search-google', [BookController::class, 'searchGoogle'])->name('books.search-google');
+    
+    // 読書記録
+    Route::resource('reading-records', ReadingRecordController::class);
+    Route::post('/reading-records/add-book/{book}', [ReadingRecordController::class, 'addFromBook'])->name('reading-records.add-book');
+    
+    // ログアウト
+    Route::post('/logout', function () {
+        auth()->logout();
+        return redirect()->route('landing');
+    })->name('logout');
 });

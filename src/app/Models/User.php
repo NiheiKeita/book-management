@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -23,6 +24,8 @@ class User extends Authenticatable
         'password',
         'tel',
         'password_token',
+        'google_id',
+        'avatar_url',
     ];
 
     /**
@@ -44,6 +47,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function readingRecords(): HasMany
+    {
+        return $this->hasMany(ReadingRecord::class);
+    }
+
+    public function readingRecordsByStatus($status): HasMany
+    {
+        return $this->readingRecords()->where('status', $status);
+    }
 
     protected static function boot()
     {

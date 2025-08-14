@@ -14,8 +14,12 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('queue:restart')->everyMinute();
-
         $schedule->command('queue:work')->everyMinute();
+        
+        // オライリーAPI同期（毎月1日午前3時）
+        $schedule->command('books:sync-oreilly')
+            ->monthlyOn(1, '03:00')
+            ->timezone('Asia/Tokyo');
     }
 
     /**

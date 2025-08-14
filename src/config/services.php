@@ -31,4 +31,20 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT_URI'),
+    ],
+
+    'oreilly' => [
+        'api_key' => env('OREILLY_API_KEY'),
+        'base_url' => env('OREILLY_API_BASE_URL'),
+    ],
+
+    'google_books' => [
+        'api_key' => env('GOOGLE_BOOKS_API_KEY'),
+        'base_url' => 'https://www.googleapis.com/books/v1',
+    ],
+
 ];
