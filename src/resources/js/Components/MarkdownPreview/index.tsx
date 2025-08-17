@@ -1,5 +1,5 @@
-import React from 'react';
-import MarkdownPreview from '@uiw/react-markdown-preview';
+import React from 'react'
+import MarkdownPreview from '@uiw/react-markdown-preview'
 
 interface MarkdownPreviewProps {
   content: string;
@@ -12,10 +12,10 @@ const MarkdownPreviewComponent: React.FC<MarkdownPreviewProps> = ({
 }) => {
   if (!content || content.trim() === '') {
     return (
-      <div className={`text-gray-500 italic ${className}`}>
+      <div className={`italic text-gray-500 ${className}`}>
         メモがありません
       </div>
-    );
+    )
   }
 
   return (
@@ -30,7 +30,7 @@ const MarkdownPreviewComponent: React.FC<MarkdownPreviewProps> = ({
         data-color-mode="light"
       />
     </div>
-  );
-};
+  )
+}
 
-export default MarkdownPreviewComponent;
+export default MarkdownPreviewComponent

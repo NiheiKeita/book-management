@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import MDEditor from '@uiw/react-md-editor';
-import '@uiw/react-md-editor/markdown-editor.css';
+import React, { useState } from 'react'
+import MDEditor from '@uiw/react-md-editor'
+import '@uiw/react-md-editor/markdown-editor.css'
 
 interface MarkdownEditorProps {
   value: string;
@@ -36,7 +36,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
         visibleDragbar={false}
       />
     </div>
-  );
-};
+  )
+}
 
-export default MarkdownEditor;
+export default MarkdownEditor

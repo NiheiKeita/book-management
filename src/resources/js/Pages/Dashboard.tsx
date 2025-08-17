@@ -1,6 +1,6 @@
-import React from 'react';
-import { Head, Link } from '@inertiajs/react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import React from 'react'
+import { Head, Link } from '@inertiajs/react'
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 
 interface User {
   id: number;
@@ -54,47 +54,47 @@ const Dashboard: React.FC<Props> = ({
       want_to_read: '読みたい',
       reading: '読んでいる',
       read: '読了',
-    };
-    return labels[status] || status;
-  };
+    }
+    return labels[status] || status
+  }
 
   const getStatusColor = (status: string) => {
     const colors: Record<string, string> = {
       want_to_read: 'bg-yellow-100 text-yellow-800',
       reading: 'bg-blue-100 text-blue-800',
       read: 'bg-green-100 text-green-800',
-    };
-    return colors[status] || 'bg-gray-100 text-gray-800';
-  };
+    }
+    return colors[status] || 'bg-gray-100 text-gray-800'
+  }
 
   return (
     <AuthenticatedLayout user={user}>
       <Head title="ダッシュボード" />
 
       <div className="py-12">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
           {/* ウェルカムセクション */}
-          <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
+          <div className="mb-6 overflow-hidden bg-white shadow-sm sm:rounded-lg">
             <div className="p-6 text-gray-900">
               <div className="flex items-center justify-between">
                 <div>
                   <h1 className="text-2xl font-bold">
                     こんにちは、{user.name}さん！
                   </h1>
-                  <p className="text-gray-600 mt-1">
+                  <p className="mt-1 text-gray-600">
                     技術書の読書記録を管理しましょう
                   </p>
                 </div>
                 <div className="flex space-x-3">
                   <Link
                     href="/books"
-                    className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                    className="rounded-md bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
                   >
                     書籍を探す
                   </Link>
                   <Link
                     href="/books/create"
-                    className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors"
+                    className="rounded-md bg-green-600 px-4 py-2 text-white transition-colors hover:bg-green-700"
                   >
                     書籍を登録
                   </Link>
@@ -104,30 +104,30 @@ const Dashboard: React.FC<Props> = ({
           </div>
 
           {/* 統計情報 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-3">
             {/* 読書ステータス */}
-            <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
               <div className="p-6">
-                <h3 className="text-lg font-medium text-gray-900 mb-4">
+                <h3 className="mb-4 text-lg font-medium text-gray-900">
                   読書ステータス
                 </h3>
                 <div className="space-y-3">
-                  <div className="flex justify-between items-center">
+                  <div className="flex items-center justify-between">
                     <span className="text-gray-600">読みたい</span>
                     <span className="font-medium">{statusCounts.want_to_read}</span>
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex items-center justify-between">
                     <span className="text-gray-600">読んでいる</span>
                     <span className="font-medium">{statusCounts.reading}</span>
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex items-center justify-between">
                     <span className="text-gray-600">読了</span>
                     <span className="font-medium">{statusCounts.read}</span>
                   </div>
                 </div>
                 <Link
                   href="/reading-records"
-                  className="block w-full text-center mt-4 text-blue-600 hover:text-blue-700 font-medium"
+                  className="mt-4 block w-full text-center font-medium text-blue-600 hover:text-blue-700"
                 >
                   すべての記録を見る
                 </Link>
@@ -135,21 +135,21 @@ const Dashboard: React.FC<Props> = ({
             </div>
 
             {/* 読書実績 */}
-            <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
               <div className="p-6">
-                <h3 className="text-lg font-medium text-gray-900 mb-4">
+                <h3 className="mb-4 text-lg font-medium text-gray-900">
                   読書実績
                 </h3>
                 <div className="space-y-3">
-                  <div className="flex justify-between items-center">
+                  <div className="flex items-center justify-between">
                     <span className="text-gray-600">今月</span>
                     <span className="font-medium">{readingStats.this_month_read}冊</span>
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex items-center justify-between">
                     <span className="text-gray-600">今年</span>
                     <span className="font-medium">{readingStats.this_year_read}冊</span>
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex items-center justify-between">
                     <span className="text-gray-600">総読書数</span>
                     <span className="font-medium">{readingStats.total_read}冊</span>
                   </div>
@@ -158,27 +158,27 @@ const Dashboard: React.FC<Props> = ({
             </div>
 
             {/* クイックアクション */}
-            <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
               <div className="p-6">
-                <h3 className="text-lg font-medium text-gray-900 mb-4">
+                <h3 className="mb-4 text-lg font-medium text-gray-900">
                   クイックアクション
                 </h3>
                 <div className="space-y-2">
                   <Link
                     href="/reading-records/create"
-                    className="block w-full text-center bg-blue-50 text-blue-700 px-3 py-2 rounded-md hover:bg-blue-100 transition-colors"
+                    className="block w-full rounded-md bg-blue-50 px-3 py-2 text-center text-blue-700 transition-colors hover:bg-blue-100"
                   >
                     読書記録を追加
                   </Link>
                   <Link
                     href="/books/create"
-                    className="block w-full text-center bg-green-50 text-green-700 px-3 py-2 rounded-md hover:bg-green-100 transition-colors"
+                    className="block w-full rounded-md bg-green-50 px-3 py-2 text-center text-green-700 transition-colors hover:bg-green-100"
                   >
                     書籍を登録
                   </Link>
                   <Link
                     href={`/users/${user.id}/reading-list`}
-                    className="block w-full text-center bg-purple-50 text-purple-700 px-3 py-2 rounded-md hover:bg-purple-100 transition-colors"
+                    className="block w-full rounded-md bg-purple-50 px-3 py-2 text-center text-purple-700 transition-colors hover:bg-purple-100"
                   >
                     公開ページを見る
                   </Link>
@@ -188,60 +188,60 @@ const Dashboard: React.FC<Props> = ({
           </div>
 
           {/* 最近の読書記録 */}
-          <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+          <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
             <div className="p-6">
-              <div className="flex justify-between items-center mb-4">
+              <div className="mb-4 flex items-center justify-between">
                 <h3 className="text-lg font-medium text-gray-900">
                   最近の読書記録
                 </h3>
                 <Link
                   href="/reading-records"
-                  className="text-blue-600 hover:text-blue-700 font-medium"
+                  className="font-medium text-blue-600 hover:text-blue-700"
                 >
                   すべて見る
                 </Link>
               </div>
 
               {recentRecords.length === 0 ? (
-                <div className="text-center py-8">
-                  <p className="text-gray-500 mb-4">
+                <div className="py-8 text-center">
+                  <p className="mb-4 text-gray-500">
                     まだ読書記録がありません
                   </p>
                   <Link
                     href="/books"
-                    className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                    className="rounded-md bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
                   >
                     書籍を探して記録を始める
                   </Link>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                   {recentRecords.map((record) => (
                     <Link
                       key={record.id}
                       href={`/reading-records/${record.id}`}
-                      className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+                      className="rounded-lg border border-gray-200 p-4 transition-shadow hover:shadow-md"
                     >
                       <div className="flex items-start space-x-3">
                         {record.book.cover_image_url ? (
                           <img
                             src={record.book.cover_image_url}
                             alt={record.book.title}
-                            className="w-12 h-16 object-cover rounded"
+                            className="h-16 w-12 rounded object-cover"
                           />
                         ) : (
-                          <div className="w-12 h-16 bg-gray-200 rounded flex items-center justify-center text-xl">
+                          <div className="flex h-16 w-12 items-center justify-center rounded bg-gray-200 text-xl">
                             📖
                           </div>
                         )}
-                        <div className="flex-1 min-w-0">
-                          <h4 className="font-medium text-gray-900 truncate">
+                        <div className="min-w-0 flex-1">
+                          <h4 className="truncate font-medium text-gray-900">
                             {record.book.title}
                           </h4>
-                          <p className="text-sm text-gray-600 truncate">
+                          <p className="truncate text-sm text-gray-600">
                             {record.book.author}
                           </p>
-                          <span className={`inline-block mt-2 px-2 py-1 text-xs rounded-full ${getStatusColor(record.status)}`}>
+                          <span className={`mt-2 inline-block rounded-full px-2 py-1 text-xs ${getStatusColor(record.status)}`}>
                             {getStatusLabel(record.status)}
                           </span>
                         </div>
@@ -255,7 +255,7 @@ const Dashboard: React.FC<Props> = ({
         </div>
       </div>
     </AuthenticatedLayout>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard

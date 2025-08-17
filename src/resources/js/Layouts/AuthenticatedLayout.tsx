@@ -1,5 +1,5 @@
-import React, { PropsWithChildren, useState } from 'react';
-import { Link, router } from '@inertiajs/react';
+import React, { PropsWithChildren, useState } from 'react'
+import { Link, router } from '@inertiajs/react'
 
 interface User {
   id: number;
@@ -16,28 +16,28 @@ const AuthenticatedLayout: React.FC<PropsWithChildren<Props>> = ({
   user,
   children,
 }) => {
-  const [showUserMenu, setShowUserMenu] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false)
 
   const logout = () => {
-    router.post('/logout');
-  };
+    router.post('/logout')
+  }
 
   const navigation = [
     { name: 'ダッシュボード', href: '/dashboard' },
     { name: '書籍を探す', href: '/books' },
     { name: '読書記録', href: '/reading-records' },
     { name: '書籍登録', href: '/books/create' },
-  ];
+  ]
 
   return (
     <div className="min-h-screen bg-gray-100">
       {/* ナビゲーションバー */}
       <nav className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 justify-between">
             <div className="flex">
               {/* ロゴ */}
-              <div className="flex-shrink-0 flex items-center">
+              <div className="flex flex-shrink-0 items-center">
                 <Link href="/dashboard" className="text-xl font-bold text-gray-900">
                   📚 Tech Book Manager
                 </Link>
@@ -49,7 +49,7 @@ const AuthenticatedLayout: React.FC<PropsWithChildren<Props>> = ({
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                    className="rounded-md px-3 py-2 text-sm font-medium text-gray-900 hover:text-blue-600"
                   >
                     {item.name}
                   </Link>
@@ -59,11 +59,11 @@ const AuthenticatedLayout: React.FC<PropsWithChildren<Props>> = ({
 
             {/* ユーザーメニュー */}
             <div className="flex items-center">
-              <div className="ml-3 relative">
+              <div className="relative ml-3">
                 <div>
                   <button
                     type="button"
-                    className="bg-white flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                     onClick={() => setShowUserMenu(!showUserMenu)}
                   >
                     <span className="sr-only">Open user menu</span>
@@ -74,7 +74,7 @@ const AuthenticatedLayout: React.FC<PropsWithChildren<Props>> = ({
                         alt={user.name}
                       />
                     ) : (
-                      <div className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm font-medium">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 text-sm font-medium text-white">
                         {user.name.charAt(0).toUpperCase()}
                       </div>
                     )}
@@ -82,9 +82,9 @@ const AuthenticatedLayout: React.FC<PropsWithChildren<Props>> = ({
                 </div>
 
                 {showUserMenu && (
-                  <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                  <div className="absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
                     <div className="py-1">
-                      <div className="px-4 py-2 text-sm text-gray-700 border-b">
+                      <div className="border-b px-4 py-2 text-sm text-gray-700">
                         <div className="font-medium">{user.name}</div>
                         <div className="text-gray-500">{user.email}</div>
                       </div>
@@ -97,7 +97,7 @@ const AuthenticatedLayout: React.FC<PropsWithChildren<Props>> = ({
                       </Link>
                       <button
                         onClick={logout}
-                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
                       >
                         ログアウト
                       </button>
@@ -111,12 +111,12 @@ const AuthenticatedLayout: React.FC<PropsWithChildren<Props>> = ({
 
         {/* モバイルメニュー */}
         <div className="sm:hidden">
-          <div className="pt-2 pb-3 space-y-1">
+          <div className="space-y-1 pb-3 pt-2">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-900 hover:text-blue-600 block px-3 py-2 text-base font-medium"
+                className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-blue-600"
               >
                 {item.name}
               </Link>
@@ -128,7 +128,7 @@ const AuthenticatedLayout: React.FC<PropsWithChildren<Props>> = ({
       {/* メインコンテンツ */}
       <main>{children}</main>
     </div>
-  );
-};
+  )
+}
 
-export default AuthenticatedLayout;
+export default AuthenticatedLayout

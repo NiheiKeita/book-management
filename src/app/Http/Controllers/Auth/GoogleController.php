@@ -12,7 +12,19 @@ class GoogleController extends Controller
 {
     public function redirect()
     {
-        return Socialite::driver('google')->redirect();
+        try {
+            return Socialite::driver('google')->redirect();
+        } catch (\Exception $e) {
+            \Log::error('Google OAuth redirect error: ' . $e->getMessage());
+            \Log::error('Google OAuth redirect error trace: ' . $e->getTraceAsString());
+            
+            // 開発環境では詳細なエラーを表示
+            $errorMessage = app()->environment('local') 
+                ? 'Google認証エラー: ' . $e->getMessage()
+                : 'Google認証の設定に問題があります。管理者にお問い合わせください。';
+                
+            return redirect()->route('landing')->with('error', $errorMessage);
+        }
     }
 
     public function callback()
@@ -35,7 +47,8 @@ class GoogleController extends Controller
 
             return redirect()->route('dashboard');
         } catch (\Exception $e) {
-            return redirect()->route('login')->with('error', 'Google認証に失敗しました。');
+            \Log::error('Google OAuth callback error: ' . $e->getMessage());
+            return redirect()->route('landing')->with('error', 'Google認証に失敗しました。' . $e->getMessage());
         }
     }
 }
