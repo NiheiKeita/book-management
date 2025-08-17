@@ -30,7 +30,7 @@ export const WebHeader = React.memo<Props>(function WebHeader({
         <header className={`sticky left-0 top-0 z-50 w-full bg-white shadow transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
             <div className="mx-auto flex items-center justify-between p-4">
                 <div className="flex items-center" >
-                    <div className='cursor-pointer' onClick={() => router.visit(route('web.top'))}>
+                    <div className='cursor-pointer' onClick={() => router.visit(route('landing'))}>
                         <img src="/img/logo.png" alt="Logo" className="h-8" />
                     </div>
                     <div className="ms-6 hidden justify-start space-x-4 md:flex">
